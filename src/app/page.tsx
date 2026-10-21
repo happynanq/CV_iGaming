@@ -1,5 +1,7 @@
 import Preloader from "@/components/slot/Preloader";
+import SlotGame from "@/components/slot/SlotGame";
 import SlotLoader from "@/components/slot/SlotLoader";
+import GameDebug from "@/components/slot/utils/dev/GameDebug";
 import Image from "next/image";
 
 export default function Home() {
@@ -7,7 +9,7 @@ export default function Home() {
     <main className="text-center"> 
       Kirill Aleksandrov - Frontend Developer 
 
-        <Preloader/>
+        <SlotGame/>
     </main>
   );
 }

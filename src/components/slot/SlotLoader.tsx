@@ -33,5 +33,5 @@ export default function SlotLoader(){
   if(loading){
     return <div> Assets loadings now</div>
   }
-  return <SlotCanvas/>
+  return <>123</>
 }
