@@ -6,7 +6,7 @@ import {
 import { StateMachine } from "../core/state-machine";
 import { spin } from "../adapters/mock-game-api";
 
-const SPIN_DURATION_MS = 1200;
+const SPIN_DURATION_MS = 1000;
 
 type GameListener = (state: GameState) => void;
 
@@ -86,6 +86,18 @@ export class GameController {
 
   reelsStopped(): void {
     if (this.machine.state !== "STOPPING") return;
+
+    if (this.state.result?.isWin) {
+      this.transition("WINNING");
+      return;
+    }
+
+    this.transition("RESULT");
+    this.spinInProgress = false;
+  }
+
+  winAnimationsCompleted(): void {
+    if (this.machine.state !== "WINNING") return;
 
     this.transition("RESULT");
     this.spinInProgress = false;

@@ -6,6 +6,7 @@ export type GamePhase =
   | "PENDING"
   | "SPINNING"
   | "STOPPING"
+  | "WINNING"
   | "RESULT";
 
 export type SymbolId =

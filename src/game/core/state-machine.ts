@@ -4,7 +4,8 @@ const transitions: Record<GamePhase, GamePhase[]> = {
   IDLE: ["PENDING"],
   PENDING: ["SPINNING"],
   SPINNING: ["STOPPING"],
-  STOPPING: ["RESULT"],
+  STOPPING: ["WINNING", "RESULT"],
+  WINNING: ["RESULT"],
   RESULT: ["IDLE"],
 };
 

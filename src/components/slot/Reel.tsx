@@ -398,6 +398,7 @@ type ReelsProps = {
   winLines: WinLine[];
   showWinLines: boolean;
   onReelsStopped: () => void;
+  onWinAnimationsComplete: () => void;
 };
 
 export default function Reels({
@@ -409,8 +410,17 @@ export default function Reels({
   winLines,
   showWinLines,
   onReelsStopped,
+  onWinAnimationsComplete,
 }: ReelsProps) {
   const stoppedReels = useRef(new Set<number>());
+  const completedWinLines = useRef(new Set<number>());
+
+  useEffect(() => {
+    completedWinLines.current.clear();
+    if (showWinLines && winLines.length === 0) {
+      onWinAnimationsComplete();
+    }
+  }, [showWinLines, winLines, onWinAnimationsComplete]);
 
   useEffect(() => {
     if (spinning) {
@@ -428,6 +438,18 @@ export default function Reels({
       }
     },
     [onReelsStopped],
+  );
+
+  const handleWinLineAnimationComplete = useCallback(
+    (index: number) => {
+      if (!showWinLines) return;
+
+      completedWinLines.current.add(index);
+      if (completedWinLines.current.size === winLines.length) {
+        onWinAnimationsComplete();
+      }
+    },
+    [onWinAnimationsComplete, showWinLines, winLines.length],
   );
 
   return (
@@ -452,6 +474,9 @@ export default function Reels({
             key={`${winLine.type}-${index}`}
             winLine={winLine}
             index={index}
+            onAnimationComplete={() =>
+              handleWinLineAnimationComplete(index)
+            }
           />
         ))}
     </pixiContainer>

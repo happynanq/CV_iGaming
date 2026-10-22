@@ -1,14 +1,11 @@
 "use client"
 import { useCallback } from "react"
-import {Container, Graphics, Sprite} from "pixi.js"
-import {extend, Application} from "@pixi/react"
+import {Application} from "@pixi/react"
 import MySymbol from "./MySymbol";
 import Reels, { REELS_HEIGHT, REELS_WIDTH } from "./Reel";
 import { GameGrid, WinLine } from "@/game/core/game-state";
 
 
-
-extend({Container, Graphics, Sprite}); 
 
 const CANVAS_PADDING = 24;
 const CANVAS_WIDTH = REELS_WIDTH + CANVAS_PADDING * 2;
@@ -21,6 +18,7 @@ type SlotCanvasProps = {
   winLines: WinLine[];
   showWinLines: boolean;
   onReelsStopped: () => void;
+  onWinAnimationsComplete: () => void;
 };
 
 
@@ -31,6 +29,7 @@ export default function SlotCanvas({
   winLines,
   showWinLines,
   onReelsStopped,
+  onWinAnimationsComplete,
 }: SlotCanvasProps) {
 
   return (
@@ -52,6 +51,7 @@ export default function SlotCanvas({
           winLines={winLines}
           showWinLines={showWinLines}
           onReelsStopped={onReelsStopped}
+          onWinAnimationsComplete={onWinAnimationsComplete}
         />
       </Application>
     </div>

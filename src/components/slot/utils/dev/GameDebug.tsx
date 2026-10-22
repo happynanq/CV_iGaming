@@ -24,7 +24,8 @@ export default function GameDebug() {
         disabled={
           state.phase === "PENDING" ||
           state.phase === "SPINNING" ||
-          state.phase === "STOPPING"
+          state.phase === "STOPPING" ||
+          state.phase === "WINNING"
         }
         className="rounded bg-purple-600 px-4 py-2 disabled:opacity-50"
       >

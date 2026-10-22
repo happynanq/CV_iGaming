@@ -25,13 +25,13 @@ export async function spin(): Promise<SpinResponse> {
 
 
 
-  const isWin = Math.random() > 0.55;
-
+  let isWin = Math.random() > 0.55;
+  isWin = true
   return {
     spinId: crypto.randomUUID(),
     grid,
     win: isWin ? 25 : 0,
     isWin,
-    winLines: isWin ? [{ type: "resume", pos: [0, 0, 0, 1, 1] }] : [],
+    winLines: isWin ? [{ type: "test", pos: [0, 0, 0, 1, 1] }] : [],
   };
 }
