@@ -12,8 +12,8 @@ type ParticleDemoProps = {
   trigger: number;
 };
 
-const PARTICLE_CANVAS_WIDTH = 256;
-const PARTICLE_CANVAS_HEIGHT = 160;
+const PARTICLE_CANVAS_WIDTH = 460;
+const PARTICLE_CANVAS_HEIGHT = 300;
 
 export function ParticleDemo({ trigger }: ParticleDemoProps) {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -68,9 +68,9 @@ export function ParticleDemo({ trigger }: ParticleDemoProps) {
         },
 
         frequency: 0.02,
-        emitterLifetime: 0.08,
-        maxParticles: 48,
-        particlesPerWave: 12,
+        emitterLifetime: 0.1,
+        maxParticles: 180,
+        particlesPerWave: 24,
         spawnChance: 1,
 
         pos: {
@@ -104,10 +104,11 @@ export function ParticleDemo({ trigger }: ParticleDemoProps) {
             config: {
               scale: {
                 list: [
-                  { value: 0.5, time: 0 },
+                  { value: 1, time: 0 },
                   { value: 0.1, time: 1 },
                 ],
               },
+              minMult: 0.35,
             },
           },
           {
@@ -126,18 +127,18 @@ export function ParticleDemo({ trigger }: ParticleDemoProps) {
             config: {
               speed: {
                 list: [
-                  { value: 210, time: 0 },
-                  { value: 45, time: 1 },
+                  { value: 320, time: 0 },
+                  { value: 70, time: 1 },
                 ],
               },
-              minMult: 0.5,
+              minMult: 0.45,
             },
           },
           {
             type: "rotation",
             config: {
-              minStart: 220,
-              maxStart: 320,
+              minStart: 0,
+              maxStart: 360,
               minSpeed: -120,
               maxSpeed: 120,
               accel: 0,
@@ -150,8 +151,8 @@ export function ParticleDemo({ trigger }: ParticleDemoProps) {
               data: {
                 x: 0,
                 y: 0,
-                radius: 2,
-                innerRadius: 0,
+                radius: 10,
+                innerRadius: 4,
                 affectRotation: false,
               },
             },
@@ -207,7 +208,7 @@ export function ParticleDemo({ trigger }: ParticleDemoProps) {
     <div
       ref={hostRef}
       aria-hidden="true"
-      className="pointer-events-none absolute bottom-0 left-1/2 z-0 h-40 w-64 -translate-x-1/2"
+      className="pointer-events-none absolute bottom-0 left-1/2 z-0 h-75 w-115 -translate-x-1/2"
     />
   );
 }

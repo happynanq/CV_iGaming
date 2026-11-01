@@ -1,12 +1,11 @@
 import type { SpinResponse, SymbolId } from "../core/game-state";
 
-const symbols: SymbolId[] = [
-  "react",
-  "typescript",
-  "pixi",
-  "wild",
-  "scatter",
-];
+
+
+// TODO: добавить прекалк 
+const symbols: SymbolId[] = ["react", "typescript", "pixi", "wild", "scatter"];
+
+let t = 0;
 
 const wait = (ms: number) =>
   new Promise<void>((resolve) => setTimeout(resolve, ms));
@@ -21,17 +20,34 @@ export async function spin(): Promise<SpinResponse> {
     ),
   );
 
-  grid=[["pixi", "pixi", "pixi"], ["pixi", "pixi", "pixi"], ["pixi", "pixi", "pixi"], ["pixi", "pixi", "pixi"], ["pixi", "pixi", "pixi"]]
-
-
-
+  switch (t) {
+    case 0:
+      grid = [
+        ["pixi", "pixi", "pixi"],
+        ["pixi", "pixi", "pixi"],
+        ["pixi", "pixi", "pixi"],
+        ["pixi", "pixi", "pixi"],
+        ["pixi", "pixi", "pixi"],
+      ];
+      break
+    case 1:
+      grid = [
+        ["react", "react", "react"],
+        ["react", "react", "react"],
+        ["react", "react", "react"],
+        ["react", "react", "react"],
+        ["react", "react", "react"],
+      ];
+      break
+  }
+  t++
   let isWin = Math.random() > 0.55;
-  isWin = true
+  isWin = false;
   return {
     spinId: crypto.randomUUID(),
     grid,
     win: isWin ? 25 : 0,
     isWin,
-    winLines: isWin ? [{ type: "test", pos: [0, 0, 0, 1, 1] }] : [],
+    winLines: isWin ? [{ type: "graphics", pos: [0, 0, 0, 1, 1] }] : [],
   };
 }
